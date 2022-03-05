@@ -10,7 +10,7 @@ html {
 
 body {
   font-family: Arvo, sans-serif;
-  height: 100vh;
+  height: 100%;
   width: 100%;
   background: linear-gradient(rgba(16, 20, 20, 0.705), rgba(16, 20, 20, 0.86)),
     url("../images/vocallog_bcg.jpg") center center/cover no-repeat fixed;
@@ -177,6 +177,11 @@ body {
 #done {
   background-color: #103a10;
 }
+
+.buttons {
+  margin-bottom: 2rem;
+}
+
 /* mainpage styles ends */
 
 footer {

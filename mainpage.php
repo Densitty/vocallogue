@@ -8,6 +8,7 @@
   <link href='https://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
   <link rel="stylesheet" href="./assets/css/style.css">
+  <link rel="stylesheet" href="./assets/css/mainpage.css">
   <title>Logs | Learn and Log</title>
 </head>
 
@@ -43,7 +44,7 @@
   <section class="container mainpage">
     <div class="row">
       <div class="col-md-offset-3 col-md-6">
-        <div>
+        <div class="buttons">
           <button type="button" id="addWord" class="btn add-btn">
             Add Word
           </button>
@@ -59,6 +60,18 @@
           <button type="button" id="all-words" class="btn add-btn">
             All Words
           </button>
+        </div>
+
+        <div id="wordpad" class="word-pad">
+          <input type="text" class="form-control">
+          <div class="word">
+            <h2></h2>
+          </div>
+          <textarea name="examples" id="examples" class="examples " cols="30" rows="10"></textarea>
+        </div>
+
+        <div id="words" class="words">
+          <!-- request to retrieve data from database using php -->
         </div>
       </div>
     </div>

@@ -1,0 +1,41 @@
+.mainpage {
+  margin-top: 100px;
+}
+
+.mainpage button {
+  background-color: #47a5c2;
+  color: #fff;
+}
+
+.mainpage button:hover {
+  background-color: #051d24;
+  color: #fff;
+}
+
+#all-words,
+#done {
+  display: none;
+}
+
+#done {
+  background-color: #103a10;
+}
+
+.buttons {
+  margin-bottom: 2rem;
+}
+
+.word-pad {
+  /* background-color: red; */
+}
+
+.examples {
+  width: 100%;
+  max-width: 100%;
+  outline: none;
+  border: 4px solid #0e617c;
+  font-size: 1.6rem;
+  border-left-width: 2rem;
+  padding: 0.8rem;
+  background-color: #f3e9e9;
+}

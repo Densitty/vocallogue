@@ -1,0 +1,192 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: Arvo, sans-serif;
+  height: 100vh;
+  width: 100%;
+  background: linear-gradient(rgba(16, 20, 20, 0.705), rgba(16, 20, 20, 0.86)),
+    url("../images/vocallog_bcg.jpg") center center/cover no-repeat fixed;
+}
+
+.navbar {
+  background-color: #030b25;
+}
+
+#logo {
+  color: #fff;
+  font-weight: 700;
+}
+
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > li > a,
+.navbar-default .navbar-nav > li > a:focus {
+  color: #3ce5fc;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+  color: #f3ecfd;
+}
+
+.navbar-default .navbar-nav > .active > a {
+  background-color: #3ce5fc;
+  color: #0e021d;
+}
+
+.navbar-default .navbar-nav > .active > a:hover {
+  background-color: #3ce5fc;
+}
+
+.navbar-default .navbar-toggle {
+  border-color: #3ce5fc;
+}
+
+.navbar-default .navbar-toggle:hover {
+  background-color: #3ce5fc;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+  background-color: #a9c1ff;
+}
+
+#my-container {
+  height: 90vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.jumbotron {
+  background: transparent;
+  color: #fff;
+  letter-spacing: 0.12rem;
+  width: 60%;
+}
+
+.jumbotron h2 {
+  text-transform: capitalize;
+  font-weight: 700;
+  font-size: 3.5rem;
+  text-align: center;
+}
+
+.jumbotron p {
+  font-size: 1.6rem;
+  /* text-align: center; */
+}
+
+.my-btn {
+  background-color: #0e021d;
+  color: #a9c1ff;
+  padding: 1rem 4rem;
+  display: block;
+  margin: auto;
+  transition: all 0.5s linear;
+  font-size: 1.7rem;
+}
+
+.jumbotron .my-btn:hover {
+  background-color: rgba(14, 2, 29, 0.719);
+  color: #fff;
+}
+
+.jumbotron .btn.focus,
+.jumbotron .btn:focus,
+.jumbotron .btn:hover {
+  color: #a9c1ff;
+  text-decoration: none;
+  border: none;
+}
+
+/* signup form */
+/* #signupform .modal-content {
+  background-color: #e0ecf7;
+  color: #000;
+} */
+.modal .modal-content {
+  background-color: #e0ecf7;
+  color: #000;
+}
+
+.modal .form-control {
+  background-color: #fff;
+  border: 1px solid #0e021d;
+  color: #000;
+}
+/*
+#signupform .form-control {
+  background-color: #fff;
+  border: 1px solid #0e021d;
+  color: #000;
+}
+
+#signupform .modal-header,
+#signupform .modal-footer {
+  border: none;
+}
+*/
+.modal .modal-header,
+.modal .modal-footer {
+  border: none;
+}
+
+.modal .close {
+  color: #000;
+  opacity: 1;
+}
+
+.modal input[type="submit"] {
+  color: #fff;
+  background: #051224;
+}
+
+.modal .btn {
+  color: #fff;
+  background: #000;
+}
+/* signup form ends */
+
+/* mainpage styles */
+.mainpage {
+  margin-top: 100px;
+}
+
+.mainpage button {
+  background-color: #47a5c2;
+  color: #fff;
+}
+
+.mainpage button:hover {
+  background-color: #051d24;
+  color: #fff;
+}
+
+#all-words,
+#done {
+  display: none;
+}
+
+#done {
+  background-color: #103a10;
+}
+/* mainpage styles ends */
+
+footer {
+  background-color: #030b25;
+  color: #fff;
+  text-align: center;
+  padding-top: 1.8rem;
+  padding-bottom: 1.8rem;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}

@@ -1,5 +1,6 @@
 .mainpage {
   margin-top: 100px;
+  height: 80vh;
 }
 
 .mainpage button {
@@ -38,4 +39,48 @@
   border-left-width: 2rem;
   padding: 0.8rem;
   background-color: #f3e9e9;
+}
+
+.profile {
+  height: 90vh;
+  width: 100%;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  margin-top: 5rem;
+  color: #fff;
+}
+
+.profile h2 {
+  /* text-align: center; */
+}
+
+.profile div {
+  /* width: 85%; */
+  /* margin: 0 auto; */
+}
+
+.profile table {
+  width: 100%;
+}
+
+.profile table tr {
+  border: 1px solid #30c8f7;
+  cursor: pointer;
+}
+
+.profile table td:first-of-type {
+  border-right: 1px solid #47a5c2;
+}
+
+.profile table tr td {
+  border: none;
+}
+
+.profile table tr:hover {
+  background: #47a5c2;
+}
+
+.modal .form-control {
+  margin-bottom: 1.2rem;
 }

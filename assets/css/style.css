@@ -48,7 +48,8 @@ body {
   border-color: #3ce5fc;
 }
 
-.navbar-default .navbar-toggle:hover {
+.navbar-default .navbar-toggle:hover,
+.navbar-default .navbar-toggle:focus {
   background-color: #3ce5fc;
 }
 

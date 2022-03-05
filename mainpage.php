@@ -27,10 +27,10 @@
       <div class="navbar-collapse collapse" id="navbar-collapse">
         <ul class="nav navbar-nav">
           <!-- <li class=""><a class="navlink" href="">Home</a></li> -->
-          <li class=""><a class="navlink" href="">Profile</a></li>
+          <li class=""><a class="navlink" href="./profile.php">Profile</a></li>
           <li><a class="navlink" href="">Help</a></li>
           <li><a class="navlink" href="">Contact</a></li>
-          <li class="active"><a class="navlink" href="">My Word Logs</a></li>
+          <li class="active"><a class="navlink" href="./mainpage.php">My Word Logs</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">

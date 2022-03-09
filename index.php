@@ -104,7 +104,7 @@
   </form>
 
   <!--Sign up form-->
-  <form method="post" id="signupform">
+  <form method="POST" id="signupform">
     <div class="modal" id="signupModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -119,7 +119,9 @@
           <div class="modal-body">
 
             <!--Sign up message from PHP file-->
-            <div id="signupmessage"></div>
+            <div id="signupmessage" class="signupmessage">
+              <!--  -->
+            </div>
 
             <div class="form-group">
               <label for="username" class="sr-only">Username:</label>
@@ -143,7 +145,7 @@
             </div>
           </div>
           <div class="modal-footer">
-            <input class="btn green" name="signup" type="submit" value="Sign up">
+            <input class="btn" name="submit" type="submit" value="Sign up">
             <button type="button" class="btn btn-default" data-dismiss="modal">
               Cancel
             </button>

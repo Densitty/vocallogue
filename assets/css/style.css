@@ -153,6 +153,10 @@ body {
   color: #fff;
   background: #000;
 }
+
+.signupmessage {
+  color: #cc0101;
+}
 /* signup form ends */
 
 /* mainpage styles */

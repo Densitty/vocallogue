@@ -78,20 +78,18 @@ $username_result = mysqli_query($conn, $query_username);
 
 if (!$username_result) {
     $ok = false;
-    $messages[] = "Error running the query. Please try again later.";
-    die(json_encode(
-        array(
-            "ok" => $ok,
-            "messages" => $messages,
-        )
-    ));
+    $messages[] = "Error running the query. Please try again later. " /*  . mysqli_error($conn) . "." */;
+
+    die_on_error($ok, $messages);
+
 } else {
     $results = mysqli_num_rows($username_result);
 
     if ($results) {
         $ok = false;
         $messages[] = "Username already registered. Please login.";
-        exit;
+
+        die_on_error($ok, $messages);
     }
 }
 
@@ -102,12 +100,14 @@ if (!$email_result) {
 
     $ok = false;
     $messages[] = "Error running the query";
-    die(json_encode(
-        array(
-            "ok" => $ok,
-            "messages" => $messages,
-        )
-    ));
+    // die(json_encode(
+    //     array(
+    //         "ok" => $ok,
+    //         "messages" => $messages,
+    //     )
+    // ));
+
+    die_on_error($ok, $messages);
 
 } else {
     $results = mysqli_num_rows($email_result);
@@ -115,14 +115,40 @@ if (!$email_result) {
     if ($results) {
         $ok = false;
         $messages[] = "Email already registered. Please login.";
-        exit;
+
+        die_on_error($ok, $messages);
+
     }
 }
 // if everything is okay, save the details into db
 if ($ok) {
-}
+    // create a unique activation code (a 32 xters long in hex)
+    $activation_key = bin2Hex(openssl_random_pseudo_bytes(16));
 
-// echo "\r\n" . print_r($_POST);
+    // hash the password before saving into db
+    $password = hash("sha256", $password);
+
+    // insert data into database
+    $query = "INSERT INTO users (`username`, `email`, `password`, `activation`) VALUES ('$username', '$email', '$password', '$activation_key')";
+
+    $result = mysqli_query($conn, $query);
+
+    // if we have no result
+    if (!$result) {
+        $ok = false;
+        $messages[] = "There was an error processing your signup. Please try again later.";
+        die_on_error($ok, $messages);
+    } else {
+        $url = "localhost";
+        // send mail to the user with the activation link
+        $body = "Please click on the link below to activate your account:\r\n";
+        $body .= "$url/activate.php?email=" . urlencode($email) . "&key=$activation_key";
+        if (mail($email, 'Please confirm your Resgistration', $body, "From:" . 'vocalogue@gmail.com')) {
+            $ok = true;
+            $messages[] = "Thank you for registering. A confirmation email has been sent to $email. Click to activate your account.";
+        }
+    }
+}
 
 // send the response back to the client
 echo json_encode(
@@ -131,3 +157,13 @@ echo json_encode(
         "messages" => $messages,
     )
 );
+
+function die_on_error($ok, $messages)
+{
+    die(json_encode(
+        array(
+            "ok" => $ok,
+            "messages" => $messages,
+        )
+    ));
+}

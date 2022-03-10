@@ -48,7 +48,20 @@ function responseHandler(responseObject) {
   console.log(responseObject);
   // if response 4rm server is ok
   if (responseObject.ok) {
-    console.log("sign up successful");
+    while (signupmessage.firstChild) {
+      signupmessage.firstChild.remove();
+    }
+
+    // now display the messages from server in DOM
+    responseObject.messages.forEach((msg) => {
+      const li = document.createElement("li");
+      li.innerHTML = msg;
+      // color the text differently
+      li.style.color = "#2c0faa";
+      li.style.marginBottom = "12px";
+
+      signupmessage.appendChild(li);
+    });
   } else {
     // target the response message display in DOM and empty it
     while (signupmessage.firstChild) {

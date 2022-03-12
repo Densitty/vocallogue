@@ -139,13 +139,13 @@ if ($ok) {
         $messages[] = "There was an error processing your signup. Please try again later.";
         die_on_error($ok, $messages);
     } else {
-        $url = "localhost";
+        $url = "http://localhost/vocalog";
         // send mail to the user with the activation link
         $body = "Please click on the link below to activate your account:\r\n";
         $body .= "$url/activate.php?email=" . urlencode($email) . "&key=$activation_key";
         if (mail($email, 'Please confirm your Resgistration', $body, "From:" . 'vocalogue@gmail.com')) {
             $ok = true;
-            $messages[] = "Thank you for registering. A confirmation email has been sent to $email. Click to activate your account.";
+            $messages[] = "Thank you for registering. A confirmation email has been sent to $email. Click on the link to activate your account.";
         }
     }
 }

@@ -69,7 +69,7 @@ require_once "./connection.php";
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li class=""><a href="#loginModal" data-toggle="modal">Login</a></li>
+          <!-- <li class=""><a href="#loginModal" data-toggle="modal">Login</a></li> -->
         </ul>
       </div>
     </div>

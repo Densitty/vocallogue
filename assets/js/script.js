@@ -27,11 +27,6 @@ signup.addEventListener("submit", (e) => {
       <div class="alert alert-danger">An error occured. Please try again later.</div>
       `;
     }
-    // try {
-    //   console.log(xhr.responseText);
-    // } catch (e) {
-    //   console.log("Could not parse JSON!");
-    // }
   });
 
   // get the data from the form and send to server
@@ -48,34 +43,99 @@ function responseHandler(responseObject) {
   console.log(responseObject);
   // if response 4rm server is ok
   if (responseObject.ok) {
-    while (signupmessage.firstChild) {
-      signupmessage.firstChild.remove();
-    }
+    // clear out message, if any, on the target element
+    clearOutputMessage(signupmessage);
 
     // now display the messages from server in DOM
-    responseObject.messages.forEach((msg) => {
-      const li = document.createElement("li");
-      li.innerHTML = msg;
-      // color the text differently
-      li.style.color = "#2c0faa";
-      li.style.marginBottom = "12px";
-
-      signupmessage.appendChild(li);
-    });
+    displayResponseObjectMessage(responseObject, signupmessage, "#2c0faa");
   } else {
     // target the response message display in DOM and empty it
-    while (signupmessage.firstChild) {
-      signupmessage.firstChild.remove();
-    }
+    clearOutputMessage(signupmessage);
 
     // now display the messages from server in DOM
-    responseObject.messages.forEach((msg) => {
-      const li = document.createElement("li");
-      li.innerHTML = msg;
-
-      signupmessage.appendChild(li);
-    });
+    displayResponseObjectMessage(responseObject, signupmessage, "#fe0001");
   }
+}
+
+// the login dom elements
+const login = document.getElementById("loginform");
+const loginmessage = document.getElementById("loginmessage");
+
+login.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  console.log(e.target);
+  const email = e.target["1"];
+  const password = e.target["2"];
+
+  // console.log(e.target["3"]);
+
+  console.log(email.value);
+  console.log(password.value);
+  const request = new XMLHttpRequest();
+
+  request.addEventListener("load", () => {
+    let response = null;
+
+    if (request.readyState === 4 && request.status === 200) {
+      console.log(request);
+      let responseObject = null;
+
+      // get response from the server
+      responseObject = JSON.parse(request.responseText);
+
+      if (responseObject) {
+        if (responseObject.ok) {
+          // redirect user to the mainpage
+          window.location = "./mainpage.php";
+        } else {
+          clearOutputMessage(loginmessage);
+
+          displayResponseObjectMessage(responseObject, loginmessage, "#fe0001");
+          // responseObject.messages.forEach((message) => {
+          //   displayMessages(message, loginmessage, "#fe0001");
+          // });
+        }
+      }
+    } else {
+      console.log("Could not parse JSON!");
+      loginmessage.innerHTML = `
+      <div class="alert alert-danger">An error occured. Please try again later.</div>
+      `;
+    }
+  });
+
+  // get the data from the form and send to server
+  const dataToPost = `email=${email.value}&password=${password.value}`;
+
+  request.open("POST", "./login.php");
+
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+  request.send(dataToPost);
+});
+
+function displayMessages(message, targetElement, color = "#2c0faa") {
+  const li = document.createElement("li");
+  li.innerHTML = message;
+
+  // color the text differently
+  li.style.color = color;
+  li.style.marginBottom = "12px";
+
+  targetElement.appendChild(li);
+}
+
+function clearOutputMessage(targetElement) {
+  while (targetElement.firstChild) {
+    targetElement.firstChild.remove();
+  }
+}
+
+function displayResponseObjectMessage(responseObject, targetElement, color) {
+  responseObject.messages.forEach((msg) => {
+    displayMessages(msg, targetElement, color);
+  });
 }
 // if(username === "" || email === "" || password === "" || password2 === "") {
 //   signupmessage.textContent = "<p>Kindly enter your</p>"

@@ -3,7 +3,7 @@
 session_start();
 require_once "./connection.php";
 
-$_POST = json_decode(file_get_contents('php://input'), true);
+// $_POST = json_decode(file_get_contents('php://input'), true);
 
 // error messages
 $missing_username = "<p>Please enter a username!</p>";

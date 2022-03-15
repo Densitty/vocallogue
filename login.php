@@ -65,9 +65,54 @@ if ($ok) {
         $_SESSION['username'] = $row['username'];
         $_SESSION['email'] = $row['email'];
 
+        print_r($_POST);
         if (empty($_POST['rememberme'])) {
             // echo "Success";
-        } else {}
+
+            $messages[] = "You are logged in but not remembered";
+        } else {
+            // create 2 variables
+            // first variable in hex
+            $authenticator1 = bin2hex(openssl_random_pseudo_bytes(10)); // will give 20 xters
+            // second variable in bin
+            $authenticator2 = openssl_random_pseudo_bytes(20);
+
+            function saveCookieValue($auth1, $auth2)
+            {
+                return $auth1 . "," . bin2hex($auth2);
+            }
+
+            // store them in a cookie
+            $cookieValue = saveCookieValue($authenticator1, $authenticator2);
+            setcookie('rememberme',
+                $cookieValue,
+                time() + 15 * 24 * 60 * 60//15*24*60*60 (15 days in secs)
+            );
+
+            function f2auth($auth1)
+            {
+                return hash('sha256', $auth1);
+            } // will produce 64 xters
+
+            $f2authenticator2 = f2auth($authenticator1);
+
+            // store the user_id as a session
+            $user_id = $_SESSION['user_id'];
+
+            // remember the password for 15 days
+            $expiration = date("Y-m-d H:i:s", time() + 15 * 24 * 60 * 60);
+            // run query to store the cookie value in the rememberme table in db
+            $query = "INSERT INTO remember_me(`authenticator1`, `f2authenticator2`, `user_id`, `expires`) VALUES ('$authenticator1', '$f2authenticator2', '$user_id', '$expiration')";
+
+            $result = mysqli_query($conn, $query);
+
+            if (!$result) {
+                $ok = false;
+                $messages[] = 'There was an error in processing the request. Please login again.';
+            } else {
+                $messages[] = 'Logged and password remembered for 15 days.';
+            }
+        }
 
     } else {
         $ok = false;

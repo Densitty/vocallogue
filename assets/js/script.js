@@ -4,6 +4,14 @@ const signup = document.getElementById("signupform");
 // get the signupmessage div
 const signupmessage = document.getElementById("signupmessage");
 
+const rememberme = document.getElementById("rememberme");
+let remember_me = false;
+
+rememberme.addEventListener("change", (e) => {
+  remember_me = !remember_me;
+  console.log(remember_me);
+});
+
 signup.addEventListener("submit", (e) => {
   // prevent default behaviour
   e.preventDefault();
@@ -64,14 +72,17 @@ const loginmessage = document.getElementById("loginmessage");
 login.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  console.log(e.target);
+  console.log(e);
   const email = e.target["1"];
   const password = e.target["2"];
+  let rememberme = false;
 
   // console.log(e.target["3"]);
+  e.target["3"].addEventListener("change", (e) => {
+    console.log(e);
+    rememberme = !rememberme;
+  });
 
-  console.log(email.value);
-  console.log(password.value);
   const request = new XMLHttpRequest();
 
   request.addEventListener("load", () => {
@@ -88,6 +99,7 @@ login.addEventListener("submit", (e) => {
         if (responseObject.ok) {
           // redirect user to the mainpage
           window.location = "./mainpage.php";
+          // console.log("logged in");
         } else {
           clearOutputMessage(loginmessage);
 
@@ -106,7 +118,9 @@ login.addEventListener("submit", (e) => {
   });
 
   // get the data from the form and send to server
-  const dataToPost = `email=${email.value}&password=${password.value}`;
+  const dataToPost = `email=${email.value}&password=${
+    password.value
+  }&rememberme=${remember_me ? true : ""}`;
 
   request.open("POST", "./login.php");
 

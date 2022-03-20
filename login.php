@@ -65,7 +65,7 @@ if ($ok) {
         $_SESSION['username'] = $row['username'];
         $_SESSION['email'] = $row['email'];
 
-        print_r($_POST);
+        // print_r($_POST);
         if (empty($_POST['rememberme'])) {
             // echo "Success";
 
@@ -82,8 +82,9 @@ if ($ok) {
                 return $auth1 . "," . bin2hex($auth2);
             }
 
-            // store them in a cookie
+            // store the created variables in a (rememberme) cookie
             $cookieValue = saveCookieValue($authenticator1, $authenticator2);
+
             setcookie('rememberme',
                 $cookieValue,
                 time() + 15 * 24 * 60 * 60//15*24*60*60 (15 days in secs)

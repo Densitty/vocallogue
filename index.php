@@ -1,3 +1,13 @@
+<?php
+session_start();
+require_once "./connection.php";
+
+// logout
+require_once "./logout.php";
+
+// remember the user when rememberme is checked
+require_once "./remember_me.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 

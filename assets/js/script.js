@@ -1,3 +1,63 @@
+// forgot password form
+const forgotPassword = document.getElementById("forgotpasswordform");
+const forgotEmail = document.getElementById("forgotemail");
+const forgotPasswordMessage = document.getElementById("forgotpasswordmessage");
+
+forgotPassword.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const request = new XMLHttpRequest();
+
+  request.addEventListener("load", () => {
+    let response = null;
+
+    if (request.readyState === 4 && request.status === 200) {
+      console.log(request);
+      let responseObject = null;
+
+      // get response from the server
+      responseObject = JSON.parse(request.responseText);
+
+      if (responseObject) {
+        if (responseObject.ok) {
+          // redirect user to the mainpage
+          // window.location = "./mainpage.php";
+          console.log("Mail sent");
+          clearOutputMessage(forgotPasswordMessage);
+
+          displayResponseObjectMessage(
+            responseObject,
+            forgotPasswordMessage,
+            "#2a641b"
+          );
+        } else {
+          clearOutputMessage(forgotPasswordMessage);
+
+          displayResponseObjectMessage(
+            responseObject,
+            forgotPasswordMessage,
+            "#fe0001"
+          );
+        }
+      }
+    } else {
+      console.log("Could not parse JSON!");
+      forgotPasswordMessage.innerHTML = `
+      <div class="alert alert-danger">An error occured. Please try again later.</div>
+      `;
+    }
+  });
+
+  // get the data from the form and send to server
+  const dataToPost = `forgotEmail=${forgotEmail.value}`;
+
+  request.open("POST", "./forgot_password.php");
+
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+  request.send(dataToPost);
+});
+
 // make a request to submit the sign-up form
 const signup = document.getElementById("signupform");
 
@@ -79,7 +139,6 @@ login.addEventListener("submit", (e) => {
 
   // console.log(e.target["3"]);
   e.target["3"].addEventListener("change", (e) => {
-    console.log(e);
     rememberme = !rememberme;
   });
 
@@ -151,6 +210,7 @@ function displayResponseObjectMessage(responseObject, targetElement, color) {
     displayMessages(msg, targetElement, color);
   });
 }
+
 // if(username === "" || email === "" || password === "" || password2 === "") {
 //   signupmessage.textContent = "<p>Kindly enter your</p>"
 // }

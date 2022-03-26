@@ -86,10 +86,6 @@ if (!$result) {
     exit;
 }
 
-// if the password is successfully changed, disable the activation key in the forgot passwordfrom being used again
-$query_forgot_password = "UPDATE forgot_password SET status = 'used' WHERE (security_key = '$key' AND user_id = '$user_id' )";
-$result = mysqli_query($conn, $query_forgot_password);
-
 if (!$result) {
     $ok = false;
     $messages[] = "Error running the query.";
@@ -97,6 +93,10 @@ if (!$result) {
 }
 
 if ($ok) {
+    // if the password is successfully changed, disable the activation key in the forgot password from being used again
+    $query_forgot_password = "UPDATE forgot_password SET status = 'used' WHERE (security_key = '$key' AND user_id = '$user_id' )";
+    $result = mysqli_query($conn, $query_forgot_password);
+
     $messages[] = "Your password has been updated successfully. Kindly login with your new password <a href='index.php'>Login</a>";
 }
 

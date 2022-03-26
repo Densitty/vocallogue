@@ -134,14 +134,6 @@ echo "
   <button type='submit' class='btn btn-success' name='resetpassword' value='reset password'>Reset Password</button>
 </form>
 ";
-
-// if (mysqli_affected_rows($conn) === 1) {
-//     echo '<div class="alert alert-success success">You account has been activated.</div>';
-//     echo "<div class='alert alert-success'>Please <a href='index.php' type='button' class='btn btn-large btn-success' id='btn'>Login</a></div>";
-// } else {
-//     echo "<div class='alert alert-danger'>Your account could not be activated. Please try again.</div>";
-// }
-// }
 ?>
       </div>
     </div>
@@ -161,14 +153,11 @@ echo $today;
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
   <script src="./assets/js/bootstrap.min.js"></script>
-  <script src="./assets/js/script.js"></script>
+  <!-- <script src="./assets/js/script.js"></script> -->
   <script>
   // make an ajax call to store_reset_password.php to process the form data;
   const password_reset = document.getElementById("password_reset");
 
-  if (password_reset !== null) {
-    console.log("Password is to be reset");
-  }
   const result_message = document.getElementById("result_message");
 
 
@@ -187,7 +176,7 @@ echo $today;
       let response = null;
 
       if (request.readyState === 4 && request.status === 200) {
-        console.log(request);
+
         let responseObject = null;
 
         // get response from the server

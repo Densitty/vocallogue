@@ -26,8 +26,37 @@
   margin-bottom: 2rem;
 }
 
-.word-pad {
-  /* background-color: red; */
+// .word-pad {
+//   /* background-color: red; */
+//   display: none;
+// }
+#wordpad {
+  display: none;
+}
+
+.noteheader {
+  border: 0.1rem solid #051d24;
+  border-radius: 1rem;
+  padding: 0.8rem;
+  margin-bottom: 1rem;
+  background-color: #b8fdff;
+  background-color: linear-gradient(rgba(255, 255, 255), #eceae7);
+}
+
+.noteheader:hover {
+  cursor: pointer;
+}
+
+.text {
+  font-size: 2rem;
+  font-weight: 600;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.timetext {
+  overflow: hidden;
 }
 
 .examples {

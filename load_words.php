@@ -38,6 +38,7 @@ if ($result2) {
             $word = $row['words'];
             $notes = $row['word_notes'];
             $time = $row['time'];
+            $time = date("F d, Y h:i:s A", strtotime($time));
             $words = array(
                 "id" => $id,
                 "word" => $word,

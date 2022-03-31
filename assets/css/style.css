@@ -174,14 +174,14 @@ body {
   color: #fff;
 }
 
-#all-words,
-#done {
-  display: none;
-}
+// #all-words,
+// #done {
+//   display: none;
+// }
 
-#done {
-  background-color: #103a10;
-}
+// #done {
+//   background-color: #103a10;
+// }
 
 .buttons {
   margin-bottom: 2rem;

@@ -13,13 +13,27 @@
   color: #fff;
 }
 
-#all-words,
-#done {
-  display: none;
-}
+// #all-words.hide_btn,
+// #done.hide_btn {
+//   // display: none;
+//   opacity: 0;
+//   visibility: none;
+// }
+
+// .hide_btns {
+//   // display: none;
+//   opacity: 0;
+//   visibility: none;
+// }
+
+// .show_btns {
+//   opacity: 1;
+//   visibility: visible;
+// }
 
 #done {
-  background-color: #103a10;
+  // background-color: #103a10;
+  margin-bottom: 2rem;
 }
 
 .buttons {

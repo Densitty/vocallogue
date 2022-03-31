@@ -51,9 +51,15 @@ if (!isset($_SESSION['user_id'])) {
   </nav>
 
   <section class="container mainpage">
+    <!-- alert message -->
+    <!-- <div class="alert alert-danger collapse" id="alert">
+      <a class="close" data-dismiss="alert" href="">&times;</a>
+      <p id="alert_content"></p>
+    </div> -->
+
     <div class="row">
       <div class="col-md-offset-3 col-md-6">
-        <div class="buttons">
+        <div class="buttons display_btns show_btns">
           <button type="button" id="addWord" class="btn add-btn">
             Add Word
           </button>
@@ -62,21 +68,28 @@ if (!isset($_SESSION['user_id'])) {
             Edit
           </button>
 
-          <button type="button" id="done" class="btn add-btn pull-right">
-            Done
-          </button>
 
+
+
+        </div>
+
+        <div class="buttons edit_btns hide_btns">
           <button type="button" id="all-words" class="btn add-btn">
             All Words
+          </button>
+
+          <button type="button" id="done" class="btn add-btn pull-right">
+            Done
           </button>
         </div>
 
         <div id="wordpad" class="word-pad">
-          <input type="text" class="form-control">
+          <input type="text" class="form-control" id="word_text">
           <div class="word">
             <h2></h2>
           </div>
-          <textarea name="examples" id="examples" class="examples " cols="30" rows="10"></textarea>
+          <textarea name="examples" id="word_notes" class="examples " cols="30" rows="10"
+            placeholder="You can enter the definition or examples or notes on how the word you entered is used..."></textarea>
         </div>
 
         <div id="words" class="words">

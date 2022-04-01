@@ -49,12 +49,26 @@
 }
 
 .noteheader {
-  border: 0.1rem solid #051d24;
+  // border: 0.1rem solid #051d24;
   border-radius: 1rem;
   padding: 0.8rem;
   margin-bottom: 1rem;
   background-color: #b8fdff;
-  background-color: linear-gradient(rgba(255, 255, 255), #eceae7);
+  position: relative;
+}
+
+.deleteBtn {
+  // content: "\00d7";
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  opacity: 1;
+  color: #fff;
+  font-size: 1.5rem;
+  padding: 1px 4px;
+  background-color: #041a20;
+  width: 2rem;
+  // transition: right 0.3s 0.2s ease-in, opacity 0.3s 0.3s linear;
 }
 
 .noteheader:hover {
@@ -79,6 +93,12 @@
 .timetext {
   overflow: hidden;
 }
+
+// .deleteBtn {
+//   height: 25px;
+//   width: 30px;
+//   background-color: red;
+// }
 
 .examples {
   width: 100%;

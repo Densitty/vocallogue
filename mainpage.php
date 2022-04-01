@@ -43,7 +43,8 @@ if (!isset($_SESSION['user_id'])) {
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li class=""><a href="#loginModal" data-toggle="modal">Logged in as <b>KBuri Kuku</b></a></li>
+          <li class=""><a href="#loginModal" data-toggle="modal">Hi
+              <b><?php echo $_SESSION["username"]; ?></b></a></li>
           <li class=""><a href="./index.php? logout=1">Logout</a></li>
         </ul>
       </div>
@@ -64,12 +65,9 @@ if (!isset($_SESSION['user_id'])) {
             Add Word
           </button>
 
-          <button type="button" id="edit" class="btn btn-info add-btn pull-right">
+          <!-- <button type="button" id="edit" class="btn btn-info add-btn pull-right">
             Edit
-          </button>
-
-
-
+          </button> -->
 
         </div>
 
@@ -84,10 +82,11 @@ if (!isset($_SESSION['user_id'])) {
         </div>
 
         <div id="wordpad" class="word-pad">
-          <input type="text" class="form-control" id="word_text" name="word_text">
-          <div class="word">
+          <input type="text" class="form-control" id="word_text" name="word_text"
+            placeholder="Enter the word you want to log. E.g. Discombobulated">
+          <!-- <div class="word">
             <h2></h2>
-          </div>
+          </div> -->
           <textarea name="examples" id="word_notes" class="examples " cols="30" rows="10" name="word_notes"
             placeholder="You can enter the definition or examples or notes on how the word you entered is used..."></textarea>
         </div>

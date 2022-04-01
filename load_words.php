@@ -77,17 +77,3 @@ echo json_encode(
         "messages" => $messages,
     )
 );
-
-/*
-echo json_encode(
-array(
-'ok' => $ok,
-"messages" => array(
-"heading" => "Boobs",
-"description" => "A slang for a woman's breast",
-),
-
-)
-);
-
- */

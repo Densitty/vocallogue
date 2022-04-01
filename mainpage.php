@@ -84,11 +84,11 @@ if (!isset($_SESSION['user_id'])) {
         </div>
 
         <div id="wordpad" class="word-pad">
-          <input type="text" class="form-control" id="word_text">
+          <input type="text" class="form-control" id="word_text" name="word_text">
           <div class="word">
             <h2></h2>
           </div>
-          <textarea name="examples" id="word_notes" class="examples " cols="30" rows="10"
+          <textarea name="examples" id="word_notes" class="examples " cols="30" rows="10" name="word_notes"
             placeholder="You can enter the definition or examples or notes on how the word you entered is used..."></textarea>
         </div>
 

@@ -61,12 +61,19 @@
   cursor: pointer;
 }
 
-.text {
+.text,
+.note_text {
   font-size: 2rem;
   font-weight: 600;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.note_text {
+  font-size: 1.4rem;
+  font-weight: 400;
+  display: none;
 }
 
 .timetext {

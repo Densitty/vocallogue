@@ -1,4 +1,9 @@
-window.addEventListener("load", loadWordsFromServer);
+window.addEventListener("load", () => {
+  loadWordsFromServer();
+  // const words = document.querySelectorAll(".noteheader");
+
+  // console.log(words);
+});
 
 function getElement(selector) {
   if (!selector) return null;
@@ -9,17 +14,45 @@ function getElement(selector) {
 const addWord = getElement("#addWord");
 const editWord = getElement("#edit");
 const submitWord = getElement("#done");
-const loadWords = getElement("#all-words");
+const loadAllWords = getElement("#all-words");
 const wordPad = getElement("#wordpad");
 const wordsDiv = getElement("#words");
 const displayBtns = getElement(".display_btns");
 const editBtns = getElement(".edit_btns");
 const mainPageContainer = getElement(".mainpage");
+const wordText = getElement("#word_text");
+const wordNotes = getElement("#word_notes");
+let activeNoteId;
+let editMode = false;
+// all words created
+
+// words.forEach((word) => {
+//   console.log(word);
+// });
+wordsDiv.addEventListener("click", (e) => {
+  let targetElement;
+  // display wordPad only when the wordText or date is clicked
+  if (e.target.parentElement.classList.contains("noteheader")) {
+    targetElement = e.target.parentElement;
+    // update the activeNoteId
+    activeNoteId = targetElement.id;
+
+    // display wordPad related btns
+    wordPad.style.display = "block";
+    editBtns.style.display = "block";
+    // hide wordDiv & related btns
+    displayBtns.style.display = "none";
+    wordsDiv.style.display = "none";
+    // insert the words into related input areas
+    wordText.value = targetElement.children[0].textContent;
+    wordNotes.value = targetElement.children[1].textContent;
+  }
+});
 
 // click on the addWord btn to create a form to enter the new word
 addWord.addEventListener("click", enterNewWord);
 // click on the Done btn to submit the created word and the notes attached
-submitWord.addEventListener("click", submitNewWord);
+loadAllWords.addEventListener("click", submitNewWord);
 // load the words (both word and notes) by making a request to load_words.php
 function loadWordsFromServer() {
   displayBtns.style.display = "block";
@@ -49,19 +82,23 @@ function loadWordsFromServer() {
             // create different elements to hold the response from the server
             const outerDiv = document.createElement("div");
             const wordDisplay = document.createElement("p");
+            const wordNote = document.createElement("p");
             const dateAdded = document.createElement("p");
             // append the word and date created to their respective elements
             wordDisplay.textContent = word;
+            wordNote.textContent = notes;
             dateAdded.textContent = time;
             // add classes and id to the elements
             outerDiv.classList.add("noteheader");
             outerDiv.id = id;
 
             wordDisplay.classList.add("text");
+            wordNote.classList.add("note_text");
             dateAdded.classList.add("timetext");
 
             // append the word & time created to the beginning and end of the parent container (outerDiv) respectively
             outerDiv.insertAdjacentElement("afterbegin", wordDisplay);
+            wordDisplay.insertAdjacentElement("afterend", wordNote);
             outerDiv.insertAdjacentElement("beforeend", dateAdded);
 
             // append outerDiv to the parent container holding all words
@@ -126,29 +163,23 @@ function clearOutputMessage(targetElement) {
 
 // add new words by making a call to create_word.php
 function enterNewWord() {
-  // console.log("Let's add a new word");
-
-  const wordText = getElement("word_text");
-  const wordNote = getElement("word_notes");
-
-  let activeNote = 0;
-
   // make a request to the create_word.php
   const request = new XMLHttpRequest();
   request.addEventListener("load", () => {
     if (request.readyState === 4 && request.status === 200) {
       let responseObject = null;
       // get response from the server
-      // console.log(request);
       responseObject = JSON.parse(request.responseText);
       if (responseObject) {
         if (responseObject.ok) {
-          // console.log("Response from the server");
+          // display the wordPad & related btns
           editBtns.style.display = "block";
+          wordPad.style.display = "block";
+          // hide wordsDiv & related btns
           displayBtns.style.display = "none";
           wordsDiv.style.display = "none";
-          wordPad.style.display = "block";
-          wordPad.focus();
+
+          activeNoteId = responseObject.messages[0];
         } else {
           // console.log(alertContent);
           // const alertBox = document.createElement("div");
@@ -235,3 +266,55 @@ function createAlertBoxMessage(element, msg) {
 }
 
 // type into the word_notes by calling the update_word.php
+submitWord.addEventListener("click", (e) => {
+  // make a request to the create_word.php
+  const request = new XMLHttpRequest();
+
+  request.addEventListener("load", () => {
+    if (request.readyState === 4 && request.status === 200) {
+      let responseObject = null;
+      // get response from the server
+      // console.log(request);
+      responseObject = JSON.parse(request.responseText);
+      if (responseObject) {
+        if (responseObject.ok) {
+          console.log(responseObject);
+          // load back all words
+          submitNewWord();
+        } else {
+          const message =
+            "There was an issue updating your word text in the database.";
+
+          displayAlertMessage(message);
+        }
+      }
+    } else {
+      // console.log("Error in processing your request at this time.");
+      displayAlertMessage();
+    }
+  });
+
+  const dataToPost = `wordText=${wordText.value}&wordNotes=${wordNotes.value}&activeNoteId=${activeNoteId}`;
+
+  request.open("POST", "./update_word.php");
+
+  request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+  request.send(dataToPost);
+
+  // reset all inputs back to empty
+  wordText.value = "";
+  wordNotes.value = "";
+});
+
+// display the wordPad & related btns
+function showWordPad() {
+  wordPad.style.display = "block";
+  editBtns.style.display = "block";
+}
+
+// hide wordsDiv & related btns
+function hideWordDiv() {
+  displayBtns.style.display = "none";
+  wordsDiv.style.display = "none";
+}

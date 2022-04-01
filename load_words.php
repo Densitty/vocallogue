@@ -27,7 +27,7 @@ if (!$result) {
     ));
 }
 
-$query_words = "SELECT * FROM words_logs WHERE user_id = '$user_id' ORDER BY time DESC";
+$query_words = "SELECT * FROM words_logs WHERE user_id = '$user_id' ORDER BY time ASC";
 $result2 = mysqli_query($conn, $query_words);
 // print_r(mysqli_num_rows($result2));
 $words_result = array();

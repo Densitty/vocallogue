@@ -1,3 +1,27 @@
+<?php
+// start session
+session_start();
+// check if user is not logged and and redirect to index on any attempt to access page
+if (!isset($_SESSION['user_id'])) {
+    header("location: index.php");
+}
+// retrieve username from users table in order to update the username after updating it
+require_once "./connection.php";
+
+$user_id = $_SESSION['user_id'];
+$query = "SELECT username, email FROM users where user_id = '$user_id' ";
+$results = mysqli_query($conn, $query);
+// get the results array returned back
+$count = mysqli_num_rows($results);
+
+if ($count === 1) {
+    $row = mysqli_fetch_array($results, MYSQLI_ASSOC);
+
+    $username = $row['username'];
+    $email = $row['email'];
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,12 +53,13 @@
           <!-- <li class=""><a class="navlink" href="">Home</a></li> -->
           <li class="active"><a class="navlink" href="./profile.php">Profile</a></li>
           <li><a class="navlink" href="">Help</a></li>
-          <li><a class="navlink" href="">Contact</a></li>
+          <li><a class="navlink" href="#">Contact</a></li>
           <li class=""><a class="navlink" href="./mainpage.php">My Word Logs</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <li class=""><a href="#loginModal" data-toggle="modal">Logged in as <b>KBuri Kuku</b></a></li>
+          <li class=""><a>Hello, <b><?php echo $username; ?></b></a>
+          </li>
           <li class=""><a href="/index.php">Logout</a></li>
         </ul>
       </div>
@@ -50,11 +75,12 @@
 
             <tr data-target="#update_username" data-toggle="modal">
               <td>Username</td>
-              <td>Kburi Kuku</td>
+              <td><?=$username;?></td>
             </tr>
             <tr data-target="#update_email" data-toggle="modal">
               <td>Email</td>
-              <td>kburikuku@gmail.com
+              <td><?=$email;?>
+
               </td>
             </tr>
             <tr data-target="#update_password" data-toggle="modal">
@@ -85,21 +111,22 @@
           <div class="modal-body">
 
             <!--Login message from PHP file-->
-            <!-- <div id="loginmessage"></div> -->
+            <div id="username_change"></div>
 
 
             <div class="form-group">
               <!-- <label for="username" class="">Your Username</label> -->
-              <input class="form-control" type="text" name="update_username" id="username" value="" maxlength="30">
+              <input class="form-control" type="text" placeholder="Enter the new username you want to change to here"
+                name="update_username" id="username" maxlength="30" value="<?=$username;?>">
             </div>
 
           </div>
 
           <div class="modal-footer">
-            <button type="submit" class="btn btn-default" data-dismiss="modal" data-target="#signupModal"
-              data-toggle="modal">
+            <button type="submit" class="btn btn-default" data-toggle="modal">
               Submit
             </button>
+
             <button type="button" class="btn btn-default" data-dismiss="modal">
               Cancel
             </button>
@@ -109,7 +136,7 @@
     </div>
   </form>
 
-  <!--Sign up form-->
+  <!--Update Email form-->
   <form method="post" id="update_email_form">
     <div class="modal" id="update_email" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
@@ -126,12 +153,12 @@
           <div class="modal-body">
 
             <!--Login message from PHP file-->
-            <!-- <div id="loginmessage"></div> -->
+            <div id="email_change"></div>
 
 
             <div class="form-group">
               <!-- <label for="username" class="">New Email</label> -->
-              <input class="form-control" type="email" name="update_email" id="email" value="">
+              <input class="form-control" type="email" name="update_email" id="email" value="<?=$email;?>">
             </div>
 
           </div>
@@ -168,16 +195,17 @@
 
             <div class="form-group">
               <!-- <label for="change_password" class="">Password</label> -->
-              <input class="form-control input" type="password" name="currentpassword" id="forgotemail"
+              <input class="form-control input" type="password" name="currentpassword" id="currentpassword"
                 placeholder="Your current password" maxlength="50" />
 
-              <input class="form-control input" type="password" name="newpassword" id="forgotemail"
+              <input class="form-control input" type="password" name="newpassword" id="newpassword"
                 placeholder="Your new password" maxlength="50" />
 
-              <input class="form-control input" type="password" name="confirmpassword" id="forgotemail"
+              <input class="form-control input" type="password" name="confirmpassword" id="comfirmnewpassword"
                 placeholder="Confirm password" maxlength="50" />
             </div>
           </div>
+
           <div class="modal-footer">
             <input class="btn green" name="change_password" type="submit" value="Submit">
             <button type="button" class="btn btn-default" data-dismiss="modal">
@@ -204,7 +232,7 @@ echo $today;
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   <!-- Include all compiled plugins (below), or include individual files as needed -->
   <script src="./assets/js/bootstrap.min.js"></script>
-  <script src="javascript.js"></script>
+  <script src="./assets/js/profile.js"></script>
 </body>
 
 </html>

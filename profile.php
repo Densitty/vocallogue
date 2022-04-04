@@ -52,15 +52,15 @@ if ($count === 1) {
         <ul class="nav navbar-nav">
           <!-- <li class=""><a class="navlink" href="">Home</a></li> -->
           <li class="active"><a class="navlink" href="./profile.php">Profile</a></li>
-          <li><a class="navlink" href="">Help</a></li>
-          <li><a class="navlink" href="#">Contact</a></li>
+          <!-- <li><a class="navlink" href="">Help</a></li>
+          <li><a class="navlink" href="#">Contact</a></li> -->
           <li class=""><a class="navlink" href="./mainpage.php">My Word Logs</a></li>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
           <li class=""><a>Hello, <b><?php echo $username; ?></b></a>
           </li>
-          <li class=""><a href="/index.php">Logout</a></li>
+          <li class=""><a href="./index.php?logout=1">Logout</a></li>
         </ul>
       </div>
     </div>
@@ -190,7 +190,7 @@ if ($count === 1) {
           <div class="modal-body">
 
             <!--forgot password message from PHP file-->
-            <div id="forgotpasswordmessage"></div>
+            <div id="updatepasswordmessage"></div>
 
 
             <div class="form-group">

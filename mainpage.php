@@ -37,8 +37,8 @@ if (!isset($_SESSION['user_id'])) {
         <ul class="nav navbar-nav">
           <!-- <li class=""><a class="navlink" href="">Home</a></li> -->
           <li class=""><a class="navlink" href="./profile.php">Profile</a></li>
-          <li><a class="navlink" href="">Help</a></li>
-          <li><a class="navlink" href="">Contact</a></li>
+          <!-- <li><a class="navlink" href="">Help</a></li>
+          <li><a class="navlink" href="">Contact</a></li> -->
           <li class="active"><a class="navlink" href="./mainpage.php">My Word Logs</a></li>
         </ul>
 

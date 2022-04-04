@@ -36,8 +36,8 @@ require_once "./remember_me.php";
       <div class="navbar-collapse collapse" id="navbar-collapse">
         <ul class="nav navbar-nav">
           <li class="active"><a class="navlink" href="">Home</a></li>
-          <li><a class="navlink" href="">Help</a></li>
-          <li><a class="navlink" href="">Contact</a></li>
+          <!-- <li><a class="navlink" href="">Help</a></li>
+          <li><a class="navlink" href="">Contact</a></li> -->
         </ul>
 
         <ul class="nav navbar-nav navbar-right">

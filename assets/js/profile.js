@@ -53,12 +53,34 @@ newEmailForm.addEventListener("submit", (e) => {
       responseObject = JSON.parse(request.responseText);
       if (responseObject) {
         if (responseObject.ok) {
-          // console.log("Username successfully changed");
-          // if name change is successful, reload the page
-          location.reload();
+          console.log("Password changed");
+
+          // emailMsg
+          emailMsg.innerHTML = "";
+          // remove the "alert-danger" class on it
+          emailMsg.classList.remove("alert-danger");
+          emailMsg.classList.add("alert", "alert-success");
+
+          responseObject.messages.forEach((msg) => {
+            const item = document.createElement("li");
+            item.textContent = msg;
+            emailMsg.insertAdjacentElement("beforeend", item);
+          });
         } else {
-          emailMsg.innerHTML = `<p class="alert alert-danger">${responseObject.messages}</p>`;
+          while (emailMsg.firstElementChild) {
+            emailMsg.firstElementChild.remove();
+          }
+
+          emailMsg.classList.add("alert", "alert-danger");
+
+          responseObject.messages.forEach((msg) => {
+            const item = document.createElement("li");
+            item.textContent = msg;
+            emailMsg.insertAdjacentElement("beforeend", item);
+          });
         }
+
+        emailMsg.style.display = "block";
       }
     } else {
       emailMsg.innerHTML = `<p class="alert alert-danger">Error in updating your username. Please try again later.</p>`;
@@ -67,7 +89,7 @@ newEmailForm.addEventListener("submit", (e) => {
 
   const dataToPost = `newEmail=${newEmail.value}`;
 
-  // request.open("POST", "./update_username.php");
+  request.open("POST", "./update_email.php");
 
   request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 

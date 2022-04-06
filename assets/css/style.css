@@ -122,6 +122,11 @@ body {
   border: 1px solid #0e021d;
   color: #000;
 }
+
+p.notice {
+  font-size: 1.2rem;
+  color: #b91313;
+}
 /*
 #signupform .form-control {
   background-color: #fff;

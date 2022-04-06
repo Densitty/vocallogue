@@ -39,10 +39,9 @@ if ($count > 0) {
 
 }
 
-// get the current email by user
+// get the current email of user
 $current_email_query = "SELECT * FROM users WHERE user_id='$id' ";
 $current_email_result = mysqli_query($conn, $current_email_query);
-// $count = $current_email_result;
 $count = mysqli_num_rows($current_email_result);
 
 if ($count === 1) {

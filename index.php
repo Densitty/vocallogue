@@ -35,7 +35,7 @@ require_once "./remember_me.php";
       </div>
       <div class="navbar-collapse collapse" id="navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class="active"><a class="navlink" href="">Home</a></li>
+          <!-- <li class="active"><a class="navlink" href="">Home</a></li> -->
           <!-- <li><a class="navlink" href="">Help</a></li>
           <li><a class="navlink" href="">Contact</a></li> -->
         </ul>
@@ -147,6 +147,8 @@ require_once "./remember_me.php";
               <label for="password" class="sr-only">Choose a password:</label>
               <input class="form-control" type="password" name="password" id="password" placeholder="Choose a password"
                 maxlength="30">
+              <p class="notice">Password should be at least 6 characters long and must contain a number and uppercase
+                alphabet.</p>
             </div>
             <div class="form-group">
               <label for="password2" class="sr-only">Confirm password</label>
